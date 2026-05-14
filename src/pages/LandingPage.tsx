@@ -3,7 +3,7 @@ import { ROUTES } from '../lib/constants'
 import Header from '../components/layout/Header'
 
 const DEMO_OPPORTUNITIES = [
-  { type: 'STATE CONTRACT', title: 'Riverside County Public Facilities', match: 92, readiness: 74, readinessLabel: 'almost ready', color: 'text-lime-600 bg-lime-50' },
+  { type: 'STATE CONTRACT', title: 'Riverside County Public Facilities', match: 92, readiness: 75, readinessLabel: 'almost ready', color: 'text-lime-600 bg-lime-50' },
   { type: 'GRANT', title: 'City of Riverside Recovery Grant', match: 95, readiness: 88, readinessLabel: 'strong match', color: 'text-green-600 bg-green-50' },
   { type: 'SUPPLIER', title: 'Kaiser Permanente Supplier Diversity', match: 78, readiness: 52, readinessLabel: 'needs work', color: 'text-amber-600 bg-amber-50' },
 ]
