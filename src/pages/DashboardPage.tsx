@@ -250,8 +250,8 @@ export default function DashboardPage() {
           const readiness = score?.overall ?? 0
           const readinessLabel = score?.label ?? 'Not Ready'
           const gapCounts = {
-            blocking: score?.gaps.filter(g => g.severity === 'blocking').length ?? 0,
-            major: score?.gaps.filter(g => g.severity === 'major').length ?? 0,
+            blocking: score?.gaps?.filter(g => g.severity === 'blocking').length ?? 0,
+            major: score?.gaps?.filter(g => g.severity === 'major').length ?? 0,
           }
           const deadline = formatDeadline(opp.deadline)
           const isUrgent = opp.deadline && new Date(opp.deadline).getTime() - Date.now() < 30 * 24 * 3600 * 1000
@@ -291,9 +291,7 @@ export default function DashboardPage() {
                   {/* Meta row */}
                   <div className="flex items-center gap-4 text-xs text-slate-500">
                     {opp.valueLabel && (
-                      <span className="flex items-center gap-1 font-medium text-slate-700">
-                        <span className="text-slate-400">$</span> {opp.valueLabel.replace('$', '')}
-                      </span>
+                      <span className="font-medium text-slate-700">{opp.valueLabel}</span>
                     )}
                     {opp.deadline && (
                       <span className={cn('flex items-center gap-1', isUrgent ? 'font-semibold text-amber-600' : '')}>
