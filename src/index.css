@@ -1,0 +1,35 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply border-slate-200;
+  }
+  body {
+    @apply bg-slate-50 text-slate-900 font-sans antialiased;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply tracking-tight;
+  }
+}
+
+@layer utilities {
+  .score-ring {
+    stroke-dasharray: 251.2;
+    stroke-linecap: round;
+    transform: rotate(-90deg);
+    transform-origin: center;
+    transition: stroke-dashoffset 1s ease-in-out;
+  }
+  .animate-typewriter {
+    overflow: hidden;
+    animation: typing 0.05s steps(1, end) forwards;
+  }
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { @apply bg-slate-100; }
+::-webkit-scrollbar-thumb { @apply bg-slate-300 rounded-full; }
+::-webkit-scrollbar-thumb:hover { @apply bg-slate-400; }
