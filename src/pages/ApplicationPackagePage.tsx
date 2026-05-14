@@ -49,7 +49,7 @@ function DocSidebarItem({
 export default function ApplicationPackagePage() {
   const { id } = useParams<{ id: string }>()
   const scoredOpp = useOpportunity(id ?? '')
-  const { generate, isGenerating, pkg } = useGeneratePackage(id ?? '')
+  const { generate, isGenerating, pkg, error: generateError } = useGeneratePackage(id ?? '')
   const [activeDocIndex, setActiveDocIndex] = useState(0)
   const [reviewed, setReviewed] = useState<Set<string>>(new Set())
   const [copied, setCopied] = useState(false)
@@ -165,6 +165,26 @@ export default function ApplicationPackagePage() {
       )}
 
       {/* Main layout */}
+      {!isGenerating && docs.length === 0 && pkg != null && pkg.status !== 'generating' && (
+        <div className="rounded-lg border border-amber-200 bg-amber-50 px-6 py-10 text-center">
+          <p className="text-sm font-medium text-amber-900">
+            {pkg.status === 'error'
+              ? generateError ?? 'Something went wrong while generating your package.'
+              : 'No documents are available yet.'}
+          </p>
+          <p className="mt-2 text-xs text-amber-800">
+            No guarantee of funding or award — you can try again or return to the opportunity to review requirements.
+          </p>
+          <button
+            type="button"
+            onClick={() => generate()}
+            className="mt-6 inline-flex items-center gap-2 rounded-md bg-slate-900 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-800 transition-colors"
+          >
+            Try again
+          </button>
+        </div>
+      )}
+
       {!isGenerating && docs.length > 0 && (
         <div className="grid grid-cols-[260px_1fr] gap-6 items-start">
           {/* Sidebar */}

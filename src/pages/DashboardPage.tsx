@@ -177,7 +177,7 @@ export default function DashboardPage() {
         <div className="bg-slate-900 px-5 py-4">
           <div className="mb-2 text-sm font-semibold text-white">Your highest-leverage move this week</div>
           <p className="mb-4 text-sm leading-relaxed text-slate-300">
-            Start with <span className="font-semibold text-white">Riverside County Public Facilities</span> (match 92, readiness 74) and the{' '}
+            Start with <span className="font-semibold text-white">Riverside County Public Facilities</span> (match 92, readiness 75) and the{' '}
             <span className="font-semibold text-white">City of Riverside Recovery Grant</span> (match 95, readiness 88). Both are local,
             both reward what you already have. Then, while those are in flight, file your California SBE certification —
             it unlocks preference points on 5 more state contracts in your matched set within 30–60 days.
