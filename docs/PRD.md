@@ -52,11 +52,12 @@ AccessBridge AI does not just help entrepreneurs find opportunities. It helps th
 
 ## Demo Business
 
-- Business Name: Autonomyx Solutions
+- Business Name: Prime Clean Solutions
 - Location: Riverside, CA
 - Industry: Commercial Cleaning
 - Years in Business: 1
 - Goal: Get contracts and funding
+- Current status: Growing commercial cleaning business with limited contract-readiness documentation
 
 ## MVP Screens
 
@@ -133,7 +134,7 @@ Matches the business against opportunity requirements.
 
 ### Readiness Scoring Agent
 
-Calculates readiness based on documentation, insurance, experience, location, industry fit, and submission readiness.
+Calculates readiness based on documentation, insurance, experience, location fit, industry fit, and submission readiness.
 
 ### Application Builder Agent
 
