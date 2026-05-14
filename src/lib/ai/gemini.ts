@@ -87,7 +87,7 @@ export async function generateDocuments(
 
   const opp = OPPORTUNITIES.find(o => o.id === opportunityId)
   const score = opp ? scoreOpportunity(profile, opp) : null
-  const gapLabels = score?.gaps.map(g => g.label) ?? []
+  const gapLabels = score?.gaps?.map(g => g.label) ?? []
 
   const [coverResult, capResult, execResult, gapResult] = await Promise.all([
     safeGenerate(coverLetterPrompt(profile, opportunityId), fallback('cover_letter')),

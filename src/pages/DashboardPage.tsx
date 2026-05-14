@@ -67,11 +67,20 @@ function ScoreRing({ score }: { score: number }) {
   )
 }
 
+const ALL_RECOMMENDED_ACTIONS = [
+  'File California SBE certification',
+  'Generate and review capability statement',
+  'Collect 2 more client references',
+  'Register on the local vendor portal',
+  'Review and submit Riverside County package before deadline',
+] as const
+
 export default function DashboardPage() {
   const navigate = useNavigate()
   const { profile } = useProfile()
   const [activeFilter, setActiveFilter] = useState<FilterType>('all')
   const [sortKey, setSortKey] = useState<SortKey>('match')
+  const [allActionsOpen, setAllActionsOpen] = useState(false)
 
   const { opportunities, pipelineStats } = useOpportunities({
     type: activeFilter === 'all' ? undefined : activeFilter,
@@ -192,7 +201,11 @@ export default function DashboardPage() {
                 <path d="M3 8h10M9 4l4 4-4 4" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </button>
-            <button className="rounded-md border border-slate-700 px-3.5 py-2 text-xs font-medium text-slate-300 hover:bg-slate-800 transition-colors">
+            <button
+              type="button"
+              onClick={() => setAllActionsOpen(true)}
+              className="rounded-md border border-slate-700 px-3.5 py-2 text-xs font-medium text-slate-300 hover:bg-slate-800 transition-colors"
+            >
               See all recommended actions
             </button>
           </div>
@@ -250,8 +263,8 @@ export default function DashboardPage() {
           const readiness = score?.overall ?? 0
           const readinessLabel = score?.label ?? 'Not Ready'
           const gapCounts = {
-            blocking: score?.gaps.filter(g => g.severity === 'blocking').length ?? 0,
-            major: score?.gaps.filter(g => g.severity === 'major').length ?? 0,
+            blocking: score?.gaps?.filter(g => g.severity === 'blocking').length ?? 0,
+            major: score?.gaps?.filter(g => g.severity === 'major').length ?? 0,
           }
           const deadline = formatDeadline(opp.deadline)
           const isUrgent = opp.deadline && new Date(opp.deadline).getTime() - Date.now() < 30 * 24 * 3600 * 1000
@@ -291,9 +304,7 @@ export default function DashboardPage() {
                   {/* Meta row */}
                   <div className="flex items-center gap-4 text-xs text-slate-500">
                     {opp.valueLabel && (
-                      <span className="flex items-center gap-1 font-medium text-slate-700">
-                        <span className="text-slate-400">$</span> {opp.valueLabel.replace('$', '')}
-                      </span>
+                      <span className="font-medium text-slate-700">{opp.valueLabel}</span>
                     )}
                     {opp.deadline && (
                       <span className={cn('flex items-center gap-1', isUrgent ? 'font-semibold text-amber-600' : '')}>
@@ -354,6 +365,56 @@ export default function DashboardPage() {
           )
         })}
       </div>
+
+      {allActionsOpen && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center p-4"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="all-recommended-actions-title"
+        >
+          <button
+            type="button"
+            className="absolute inset-0 bg-slate-900/50"
+            aria-label="Close dialog"
+            onClick={() => setAllActionsOpen(false)}
+          />
+          <div className="relative w-full max-w-md rounded-lg border border-slate-200 bg-white p-5 shadow-xl">
+            <div className="mb-4 flex items-start justify-between gap-3">
+              <h2 id="all-recommended-actions-title" className="text-lg font-semibold text-slate-900">
+                All recommended actions
+              </h2>
+              <button
+                type="button"
+                onClick={() => setAllActionsOpen(false)}
+                className="rounded-md p-1 text-slate-400 hover:bg-slate-100 hover:text-slate-600"
+                aria-label="Close"
+              >
+                <svg viewBox="0 0 16 16" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M4 4l8 8M12 4l-8 8" strokeLinecap="round" />
+                </svg>
+              </button>
+            </div>
+            <ul className="list-disc space-y-2 pl-5 text-sm text-slate-600">
+              {ALL_RECOMMENDED_ACTIONS.map((action) => (
+                <li key={action}>{action}</li>
+              ))}
+            </ul>
+            <p className="mt-4 text-xs leading-relaxed text-slate-500">
+              These actions are prioritized by readiness lift and application urgency.
+            </p>
+            <div className="mt-5 flex justify-end">
+              <button
+                type="button"
+                onClick={() => setAllActionsOpen(false)}
+                className="rounded-md bg-slate-900 px-3 py-1.5 text-xs font-medium text-white hover:bg-slate-800"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </PageShell>
   )
 }

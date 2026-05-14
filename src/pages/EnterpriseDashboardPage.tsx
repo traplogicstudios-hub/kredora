@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { ROUTES } from '../lib/constants'
 import AIAnalysisBar from '../components/layout/AIAnalysisBar'
@@ -61,6 +62,20 @@ const SUPPORT_PROGRAMS = [
   { title: 'Insurance Cost-Share Program', fits: 169, lift: 'Removes blocker for 41% of vendors', liftColor: 'text-amber-700 bg-amber-50' },
 ]
 
+type EnterpriseViewTab = 'city' | 'sector' | 'program'
+
+const ENTERPRISE_VIEW_TABS: { id: EnterpriseViewTab; label: string }[] = [
+  { id: 'city', label: 'City view' },
+  { id: 'sector', label: 'By sector' },
+  { id: 'program', label: 'By program' },
+]
+
+const ENTERPRISE_VIEW_NOTES: Record<EnterpriseViewTab, string> = {
+  city: 'Showing aggregate readiness across all tracked businesses.',
+  sector: 'Showing blockers grouped by industry sector.',
+  program: 'Showing recommended support programs by readiness lift.',
+}
+
 const KPI_CARDS = [
   {
     label: 'Businesses Tracked', value: '412', trend: '+12%', trendNote: 'active in last 90 days',
@@ -82,6 +97,8 @@ const KPI_CARDS = [
 
 export default function EnterpriseDashboardPage() {
   const navigate = useNavigate()
+  const [viewTab, setViewTab] = useState<EnterpriseViewTab>('city')
+  const [workshopOpen, setWorkshopOpen] = useState(false)
 
   return (
     <div className="min-h-screen bg-slate-50">
@@ -141,17 +158,24 @@ export default function EnterpriseDashboardPage() {
                 <span className="font-medium text-slate-700">City of Riverside Economic Development</span> · viewing all tracked small businesses
               </span>
             </div>
-            <div className="flex items-center gap-1 rounded-lg border border-slate-200 bg-white p-1">
-              {['City view', 'By sector', 'By program'].map((tab, i) => (
-                <button
-                  key={tab}
-                  className={`rounded-md px-3 py-1 text-xs font-medium transition-colors ${
-                    i === 0 ? 'bg-slate-900 text-white' : 'text-slate-500 hover:text-slate-700'
-                  }`}
-                >
-                  {tab}
-                </button>
-              ))}
+            <div className="flex flex-col items-end gap-1.5">
+              <div className="flex items-center gap-1 rounded-lg border border-slate-200 bg-white p-1">
+                {ENTERPRISE_VIEW_TABS.map(({ id, label }) => (
+                  <button
+                    key={id}
+                    type="button"
+                    onClick={() => setViewTab(id)}
+                    className={`rounded-md px-3 py-1 text-xs font-medium transition-colors ${
+                      viewTab === id ? 'bg-slate-900 text-white' : 'text-slate-500 hover:text-slate-700'
+                    }`}
+                  >
+                    {label}
+                  </button>
+                ))}
+              </div>
+              <p className="max-w-sm text-right text-[11px] leading-snug text-slate-500">
+                {ENTERPRISE_VIEW_NOTES[viewTab]}
+              </p>
             </div>
           </div>
         </div>
@@ -209,7 +233,11 @@ export default function EnterpriseDashboardPage() {
               This is the highest-ROI program to fund this quarter.
             </p>
             <div className="flex items-center gap-2">
-              <button className="inline-flex items-center gap-1.5 rounded-md bg-primary-600 px-3.5 py-2 text-xs font-semibold text-white hover:bg-primary-500 transition-colors">
+              <button
+                type="button"
+                onClick={() => setWorkshopOpen(true)}
+                className="inline-flex items-center gap-1.5 rounded-md bg-primary-600 px-3.5 py-2 text-xs font-semibold text-white hover:bg-primary-500 transition-colors"
+              >
                 Launch capability statement workshop
                 <svg viewBox="0 0 16 16" fill="none" className="h-3.5 w-3.5" stroke="currentColor" strokeWidth="2">
                   <path d="M3 8h10M9 4l4 4-4 4" strokeLinecap="round" strokeLinejoin="round" />
@@ -364,6 +392,57 @@ export default function EnterpriseDashboardPage() {
           </div>
         </div>
       </main>
+
+      {workshopOpen && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center p-4"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="workshop-plan-title"
+        >
+          <button
+            type="button"
+            className="absolute inset-0 bg-slate-900/50"
+            aria-label="Close dialog"
+            onClick={() => setWorkshopOpen(false)}
+          />
+          <div className="relative w-full max-w-md rounded-lg border border-slate-200 bg-white p-5 shadow-xl">
+            <div className="mb-4 flex items-start justify-between gap-3">
+              <h2 id="workshop-plan-title" className="text-lg font-semibold text-slate-900">
+                Capability Statement Workshop Plan
+              </h2>
+              <button
+                type="button"
+                onClick={() => setWorkshopOpen(false)}
+                className="rounded-md p-1 text-slate-400 hover:bg-slate-100 hover:text-slate-600"
+                aria-label="Close"
+              >
+                <svg viewBox="0 0 16 16" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M4 4l8 8M12 4l-8 8" strokeLinecap="round" />
+                </svg>
+              </button>
+            </div>
+            <ul className="list-disc space-y-2 pl-5 text-sm text-slate-600">
+              <li>Target audience: 296 businesses missing capability statements</li>
+              <li>Expected lift: +11 readiness points average</li>
+              <li>Recommended format: 90-minute virtual clinic + downloadable template</li>
+              <li>Outcome: businesses leave with a review-ready capability statement</li>
+            </ul>
+            <p className="mt-4 rounded-md border border-slate-200 bg-slate-50 px-3 py-2 text-xs font-medium text-slate-600">
+              Demo preview — workflow not submitted.
+            </p>
+            <div className="mt-5 flex justify-end">
+              <button
+                type="button"
+                onClick={() => setWorkshopOpen(false)}
+                className="rounded-md bg-slate-900 px-3 py-1.5 text-xs font-medium text-white hover:bg-slate-800"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
