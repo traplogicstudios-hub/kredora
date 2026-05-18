@@ -76,16 +76,25 @@ export default function EnterpriseDashboardPage() {
               track advisor reports, and launch new assessments in minutes.
             </p>
           </div>
-          <button
-            type="button"
-            onClick={() => navigate(ROUTES.ASSESS)}
-            className="inline-flex shrink-0 items-center gap-2 rounded-md bg-primary-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-primary-500 transition-colors"
-          >
-            New Assessment
-            <svg viewBox="0 0 16 16" fill="none" className="h-4 w-4" stroke="currentColor" strokeWidth="2">
-              <path d="M3 8h10M9 4l4 4-4 4" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </button>
+          <div className="flex shrink-0 gap-2">
+            <button
+              type="button"
+              onClick={() => navigate(ROUTES.REPORT)}
+              className="inline-flex items-center gap-2 rounded-md border border-slate-300 bg-white px-5 py-2.5 text-sm font-semibold text-slate-700 hover:bg-slate-50 transition-colors"
+            >
+              View Demo Report
+            </button>
+            <button
+              type="button"
+              onClick={() => navigate(ROUTES.ASSESS)}
+              className="inline-flex items-center gap-2 rounded-md bg-primary-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-primary-500 transition-colors"
+            >
+              New Assessment
+              <svg viewBox="0 0 16 16" fill="none" className="h-4 w-4" stroke="currentColor" strokeWidth="2">
+                <path d="M3 8h10M9 4l4 4-4 4" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </button>
+          </div>
         </div>
 
         <div className="flex flex-wrap gap-2">
