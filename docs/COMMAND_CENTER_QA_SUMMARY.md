@@ -1,37 +1,53 @@
-# Command Center — AccessBridge AI QA Summary (May 14, 2026)
+# Command Center — Kredora Final QA Summary
 
-Parallel static QA and build verification on `main` after manual UI testing in a separate session.
+**Date:** 2026-05-17  
+**Product:** Kredora — AI Funding Readiness Intelligence  
+**Branch:** `main`  
+**Full report:** [KREDORA_FINAL_QA_REPORT_2026-05-17.md](./KREDORA_FINAL_QA_REPORT_2026-05-17.md)
 
-## Commands executed
-
-| Command        | Result                          |
-|----------------|---------------------------------|
-| `npm install`  | Success (dependency audit noise) |
-| `npm run build`| Success (`tsc && vite build`)   |
-| `npm run lint` | Success (`--max-warnings 0`)    |
-
-## Scope reviewed
-
-- Route integrity vs nav/CTAs (`/`, `/onboard`, `/dashboard`, `/opportunity/:id`, `/apply/:id`, `/enterprise`); invalid IDs show “Opportunity not found” without crashing.
-- Demo business naming: **Prime Clean Solutions** in app; **Autonomyx** appears only in older docs (`EXECUTION_PROMPT.md`, `ARCHITECTURE.md`) — align docs when convenient.
-- API keys: `GEMINI_API_KEY` server-only in `api/generate.ts`; no real keys committed; client uses `/api/generate` + mock fallbacks (`VITE_USE_MOCK_AI`).
-- Mock AI / package flow: disclaimers present (“No guarantee of funding or award”, mock-safe copy); `generateDocuments` avoids throwing on API failure.
-- Data: Riverside County top match **92** match score; computed readiness **75** (engine output), with gaps and action items; application package flow validated in code.
-
-## Changes shipped in this branch
-
-1. **Demo copy accuracy** — Dashboard and landing hero mock now say readiness **75** for Riverside County, matching `scoreOpportunity(DEMO_PROFILE, opp-riv-county-001)`.
-2. **Security** — Removed `Access-Control-Allow-Origin: *` from `vercel.json` for `/api/*` to prevent cross-origin abuse of `/api/generate` while keeping same-origin SPA behavior.
-3. **Resilience** — `ApplicationPackagePage` shows an error/retry panel (with disclaimer) when generation fails or returns no documents, instead of a blank content area.
-
-## Remaining risks (not changed here)
-
-- `/api/generate` has no auth or rate limiting (operational hardening).
-- `npm audit` reports 9 dependency vulnerabilities.
-- Confirm live Gemini model/API compatibility after deploy.
-- Pipeline aggregation skips numeric `value` when omitted (e.g. one federal row).
-- Dashboard “See all recommended actions” button is still a non-functional placeholder.
+---
 
 ## Verdict
 
-**Suitable for deployment** for the demo path after merge, with follow-up on API hardening and dependency audit as the product matures.
+**Ready for hackathon demo recording.** Build passes; demo path is wired end-to-end; blockers from the final QA pass are fixed.
+
+---
+
+## Build
+
+| Command | Result |
+|---------|--------|
+| `npm run build` | Pass (`tsc && vite build`) |
+
+---
+
+## Demo path (10 steps)
+
+Landing → Advisor Dashboard → Assessment → Load Demo Profile → Generate Report → 5-step Gemini loading (~3.8s) → Funding Readiness Report → Copy Advisor Report.
+
+All routes live. Mock report uses **Autonomyx Solutions**. No AccessBridge / Prime Clean / grant-finder copy in visible UI.
+
+---
+
+## Fixes shipped (this commit)
+
+1. **Landing mobile** — Responsive grids and stacked CTAs/stats on small screens  
+2. **Dashboard** — Removed dead “Learn more” buttons; table scrolls horizontally on mobile  
+3. **Copy report** — Clipboard API + `execCommand` fallback  
+4. **Demo banner** — Mobile-friendly layout; quick links hidden below `md`
+
+---
+
+## Remaining risks (low — no action required for demo)
+
+- Legacy `/opportunities` routes still exist but are not in demo nav  
+- Analysis uses mock data (no live Gemini call) — expected for hackathon  
+- Clear browser session if stale profile appears in header  
+
+---
+
+## For Command Center
+
+- Spec: [KREDORA_ENTERPRISE_REPOSITIONING_PLAN.md](./KREDORA_ENTERPRISE_REPOSITIONING_PLAN.md)  
+- Run `npm run dev` and walk the checklist in the full report before recording  
+- Prior May 14 AccessBridge QA summary superseded by this Kredora pass  

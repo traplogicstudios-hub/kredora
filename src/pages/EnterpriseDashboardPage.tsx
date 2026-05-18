@@ -131,8 +131,8 @@ export default function EnterpriseDashboardPage() {
             <h2 className="text-base font-semibold text-slate-900">Recent assessments</h2>
             <span className="font-mono text-[9px] uppercase tracking-widest text-slate-400">Last 30 days</span>
           </div>
-          <div className="overflow-hidden rounded-lg border border-slate-200 bg-white">
-            <table className="w-full">
+          <div className="overflow-x-auto rounded-lg border border-slate-200 bg-white">
+            <table className="w-full min-w-[520px]">
               <thead>
                 <tr className="border-b border-slate-100 bg-slate-50">
                   <th className="py-2.5 pl-4 text-left font-mono text-[9px] uppercase tracking-widest text-slate-400">
@@ -241,12 +241,7 @@ export default function EnterpriseDashboardPage() {
                 <div key={prog.title} className="rounded-lg border border-slate-200 bg-white p-4">
                   <div className="text-sm font-semibold text-slate-900">{prog.title}</div>
                   <p className="mt-1.5 text-xs leading-relaxed text-slate-500">{prog.description}</p>
-                  <button
-                    type="button"
-                    className="mt-3 text-xs font-medium text-primary-600 hover:text-primary-500"
-                  >
-                    Learn more
-                  </button>
+                  <p className="mt-3 text-xs text-slate-400">Program resource (demo)</p>
                 </div>
               ))}
             </div>

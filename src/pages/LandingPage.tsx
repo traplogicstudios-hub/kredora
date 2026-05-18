@@ -53,7 +53,7 @@ export default function LandingPage() {
       <Header />
 
       <section className="mx-auto max-w-7xl px-6 pt-16 pb-20">
-        <div className="grid grid-cols-2 items-center gap-16">
+        <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-16">
           <div>
             <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-slate-200 bg-slate-50 px-3 py-1">
               <span className="h-1.5 w-1.5 rounded-full bg-green-500" />
@@ -62,7 +62,7 @@ export default function LandingPage() {
               </span>
             </div>
 
-            <h1 className="mb-2 text-5xl font-bold tracking-tight text-slate-900">Kredora</h1>
+            <h1 className="mb-2 text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl">Kredora</h1>
             <p className="mb-6 text-xl font-medium text-primary-600">AI Funding Readiness Intelligence</p>
 
             <p className="mb-8 text-lg leading-relaxed text-slate-500">
@@ -75,18 +75,18 @@ export default function LandingPage() {
               and economic development teams supporting small business owners.
             </p>
 
-            <div className="flex items-center gap-3">
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
               <button
                 type="button"
                 onClick={() => navigate(ROUTES.DASHBOARD)}
-                className="inline-flex items-center gap-2 rounded-md border border-slate-300 bg-white px-5 py-2.5 text-sm font-semibold text-slate-700 hover:bg-slate-50 transition-colors"
+                className="inline-flex items-center justify-center gap-2 rounded-md border border-slate-300 bg-white px-5 py-2.5 text-sm font-semibold text-slate-700 hover:bg-slate-50 transition-colors"
               >
                 View Advisor Dashboard
               </button>
               <button
                 type="button"
                 onClick={() => navigate(ROUTES.ASSESS)}
-                className="inline-flex items-center gap-2 rounded-md bg-primary-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-primary-700 transition-colors"
+                className="inline-flex items-center justify-center gap-2 rounded-md bg-primary-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-primary-700 transition-colors"
               >
                 Start Free Assessment
                 <svg viewBox="0 0 16 16" fill="none" className="h-4 w-4" stroke="currentColor" strokeWidth="2">
@@ -95,7 +95,7 @@ export default function LandingPage() {
               </button>
             </div>
 
-            <div className="mt-10 flex items-center gap-10">
+            <div className="mt-10 flex flex-wrap items-center gap-6 sm:gap-10">
               <div>
                 <div className="text-2xl font-bold tracking-tight text-slate-900">124</div>
                 <div className="font-mono text-[10px] uppercase tracking-widest text-slate-400">Businesses Assessed</div>
@@ -172,7 +172,7 @@ export default function LandingPage() {
       <section className="border-t border-slate-100 bg-slate-50">
         <div className="mx-auto max-w-7xl px-6 py-16">
           <div className="mb-3 font-mono text-[10px] uppercase tracking-widest text-slate-400">The problem</div>
-          <div className="mb-10 grid grid-cols-3 gap-8">
+          <div className="mb-10 grid grid-cols-1 gap-6 md:grid-cols-3 md:gap-8">
             {PROBLEM_COLUMNS.map((col) => (
               <div key={col.title} className="rounded-xl border border-slate-200 bg-white p-6">
                 <h3 className="mb-2 text-base font-semibold text-slate-900">{col.title}</h3>
@@ -185,10 +185,10 @@ export default function LandingPage() {
 
       <section className="mx-auto max-w-7xl px-6 py-16">
         <div className="mb-3 font-mono text-[10px] uppercase tracking-widest text-slate-400">Who it&apos;s for</div>
-        <h2 className="mb-8 text-3xl font-bold tracking-tight text-slate-900">
+        <h2 className="mb-8 text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl">
           Funding readiness intelligence for the teams that support entrepreneurs
         </h2>
-        <div className="grid grid-cols-5 gap-4">
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-5 lg:gap-4">
           {AUDIENCE_CARDS.map((name) => (
             <div
               key={name}
@@ -203,7 +203,7 @@ export default function LandingPage() {
       <section className="border-t border-slate-100 bg-slate-50">
         <div className="mx-auto max-w-7xl px-6 py-16">
           <div className="mb-3 font-mono text-[10px] uppercase tracking-widest text-slate-400">How it works</div>
-          <div className="grid grid-cols-5 gap-6">
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-5">
             {HOW_IT_WORKS.map((step) => (
               <div key={step.num}>
                 <div className="mb-2 font-mono text-xs font-medium text-slate-400">{step.num}</div>
@@ -216,7 +216,7 @@ export default function LandingPage() {
       </section>
 
       <section className="mx-auto max-w-7xl px-6 py-16">
-        <div className="grid grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
           <div className="rounded-xl bg-slate-900 p-8 text-white">
             <div className="mb-3 font-mono text-[10px] uppercase tracking-widest text-slate-400">For the business owner</div>
             <h3 className="mb-5 text-2xl font-bold">Clarity before you apply.</h3>
