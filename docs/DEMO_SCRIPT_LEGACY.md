@@ -1,3 +1,5 @@
+> Legacy script — references the previous AccessBridge AI concept and Prime Clean Solutions demo profile. The current Kredora demo flow is documented in docs/KREDORA_FINAL_QA_REPORT_2026-05-17.md and docs/KREDORA_SUBMISSION_COPY.md.
+
 # Demo Script
 
 ## Opening

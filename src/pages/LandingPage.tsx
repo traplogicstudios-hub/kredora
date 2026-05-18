@@ -79,19 +79,19 @@ export default function LandingPage() {
               <button
                 type="button"
                 onClick={() => navigate(ROUTES.DASHBOARD)}
-                className="inline-flex items-center justify-center gap-2 rounded-md border border-slate-300 bg-white px-5 py-2.5 text-sm font-semibold text-slate-700 hover:bg-slate-50 transition-colors"
+                className="inline-flex items-center justify-center gap-2 rounded-md bg-primary-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-primary-700 transition-colors"
               >
                 View Advisor Dashboard
+                <svg viewBox="0 0 16 16" fill="none" className="h-4 w-4" stroke="currentColor" strokeWidth="2">
+                  <path d="M3 8h10M9 4l4 4-4 4" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
               </button>
               <button
                 type="button"
                 onClick={() => navigate(ROUTES.ASSESS)}
-                className="inline-flex items-center justify-center gap-2 rounded-md bg-primary-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-primary-700 transition-colors"
+                className="inline-flex items-center justify-center gap-2 rounded-md border border-slate-300 bg-white px-5 py-2.5 text-sm font-semibold text-slate-700 hover:bg-slate-50 transition-colors"
               >
                 Start Free Assessment
-                <svg viewBox="0 0 16 16" fill="none" className="h-4 w-4" stroke="currentColor" strokeWidth="2">
-                  <path d="M3 8h10M9 4l4 4-4 4" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
               </button>
             </div>
 
@@ -254,7 +254,7 @@ export default function LandingPage() {
               {[
                 'Organization-level view of assessed businesses and readiness gaps',
                 'Advisor-ready reports you can act on in minutes',
-                'Illustrative intelligence — not financial or legal advice',
+                'Identify patterns across your portfolio — which gaps are most common, which businesses are closest to ready',
               ].map((item) => (
                 <li key={item} className="flex items-start gap-3">
                   <svg

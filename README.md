@@ -24,7 +24,11 @@ Demo profile: **Autonomyx Solutions** — AI automation and tech services, River
 
 - React, Vite, TypeScript, Tailwind CSS
 - Zustand (session persistence for demo)
-- Gemini API / Google AI Studio (mock-safe fallback for hackathon demo)
+- Gemini API / Google AI Studio — live prompt integration with structured JSON output schema; demo mode runs structured mock output matching the live prompt schema
+
+## How AI Works
+
+Kredora uses a structured Gemini prompt to analyze business intake data across five funding readiness dimensions: Business Foundation, Documentation Readiness, Revenue Clarity, Funding Fit, and Application Preparedness. The app expects structured JSON output so advisor reports can be rendered consistently. For demo stability, the hackathon build uses mock output that matches the live Gemini schema.
 
 ## Source of Truth
 
