@@ -50,6 +50,14 @@ This project follows the TrapLogic Studios build workflow:
 - Devlog for every major progress point
 - No overbuilding during hackathon MVP
 
+## Kredora Enterprise Repositioning Plan
+
+The app is being repositioned as **Kredora — AI Funding Readiness Intelligence** for the hackathon final submission. This document is the implementation source of truth for the full enterprise pivot:
+
+**[docs/KREDORA_ENTERPRISE_REPOSITIONING_PLAN.md](docs/KREDORA_ENTERPRISE_REPOSITIONING_PLAN.md)**
+
+It covers product positioning, required demo flow, all copy and data specs, the Gemini prompt structure, Cursor agent split, implementation order, and the definition of done. All Cursor agents should reference it before making changes.
+
 ## Status
 
-M0: Repo foundation in progress.
+M0: Repo foundation in progress. Enterprise repositioning in progress — see Kredora plan above.
