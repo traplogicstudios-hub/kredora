@@ -3,9 +3,6 @@ import ScrollToTop from './components/ScrollToTop'
 import { ROUTES } from './lib/constants'
 import LandingPage from './pages/LandingPage'
 import OnboardPage from './pages/OnboardPage'
-import DashboardPage from './pages/DashboardPage'
-import OpportunityDetailPage from './pages/OpportunityDetailPage'
-import ApplicationPackagePage from './pages/ApplicationPackagePage'
 import EnterpriseDashboardPage from './pages/EnterpriseDashboardPage'
 import AnalysisPage from './pages/AnalysisPage'
 import FundingReadinessReportPage from './pages/FundingReadinessReportPage'
@@ -22,9 +19,9 @@ export default function App() {
         <Route path={ROUTES.ENTERPRISE} element={<Navigate to={ROUTES.DASHBOARD} replace />} />
         <Route path={ROUTES.ANALYZING} element={<AnalysisPage />} />
         <Route path={ROUTES.REPORT} element={<FundingReadinessReportPage />} />
-        <Route path={ROUTES.OPPORTUNITIES} element={<DashboardPage />} />
-        <Route path="/opportunity/:id" element={<OpportunityDetailPage />} />
-        <Route path="/apply/:id" element={<ApplicationPackagePage />} />
+        <Route path={ROUTES.OPPORTUNITIES} element={<Navigate to={ROUTES.DASHBOARD} replace />} />
+        <Route path="/opportunity/:id" element={<Navigate to={ROUTES.DASHBOARD} replace />} />
+        <Route path="/apply/:id" element={<Navigate to={ROUTES.DASHBOARD} replace />} />
         <Route path="*" element={<Navigate to={ROUTES.LANDING} replace />} />
       </Routes>
     </BrowserRouter>

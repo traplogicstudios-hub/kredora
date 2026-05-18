@@ -199,11 +199,37 @@ export const useAppStore = create<AppState>()(
         readinessReport: state.readinessReport,
       }),
 
-      // After sessionStorage is read, recompute scores so the dashboard is ready
+      // After sessionStorage is read, migrate legacy Prime Clean data and recompute scores
       onRehydrateStorage: () => (state) => {
-        if (state?.profileComplete && state.profile.businessName) {
-          // Tiny setTimeout so the store is fully initialized before we read from it
-          setTimeout(() => state.recomputeScores(), 0)
+        if (!state) return
+
+        const LEGACY_DEMO_NAME = 'Prime Clean Solutions'
+        const needsAssessmentMigration =
+          state.assessment.businessName === LEGACY_DEMO_NAME
+        const needsProfileMigration =
+          state.profile.businessName === LEGACY_DEMO_NAME
+
+        if (needsAssessmentMigration || needsProfileMigration) {
+          setTimeout(() => {
+            const patch: Partial<AppState> = {}
+            if (needsAssessmentMigration) {
+              patch.assessment = KREDORA_DEMO_PROFILE
+              patch.assessmentComplete = true
+            }
+            if (needsProfileMigration) {
+              patch.profile = EMPTY_PROFILE
+              patch.profileComplete = false
+            }
+            useAppStore.setState(patch)
+          }, 0)
+        }
+
+        if (
+          state.profileComplete &&
+          state.profile.businessName &&
+          !needsProfileMigration
+        ) {
+          setTimeout(() => useAppStore.getState().recomputeScores(), 0)
         }
       },
     }

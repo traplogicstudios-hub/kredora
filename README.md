@@ -1,63 +1,44 @@
-# AccessBridge AI
+# Kredora
 
-AI-powered opportunity readiness platform that helps small businesses find, qualify for, and apply to grants, contracts, supplier diversity programs, and business funding.
+**AI Funding Readiness Intelligence** — an enterprise-focused platform for business support organizations and the entrepreneurs they serve.
 
-## Hackathon
+Built for the [TechEx Intelligent Enterprise Solutions Hackathon](https://lablab.ai) with the theme: **Transforming Enterprise Through AI**.
 
-Built for the TechEx Intelligent Enterprise Solutions Hackathon with the theme: **Transforming Enterprise Through AI**.
+> This repository began as **AccessBridge AI**, an opportunity-readiness MVP prototype. The hackathon submission is **Kredora**, repositioned for funding readiness intelligence. Legacy opportunity-matching modules remain in the codebase but are not part of the demo flow.
 
-## Mission
+## What Kredora Does
 
-Small businesses do not miss opportunities because they lack ambition. They miss them because the opportunity system is fragmented, confusing, and hard to navigate.
-
-AccessBridge AI closes the gap between opportunity discovery and execution.
+Kredora helps chambers of commerce, nonprofits, accelerators, grant consultants, community lenders, and economic development teams assess entrepreneurs, identify funding gaps, and generate advisor-ready action plans in minutes.
 
 ## Core Demo Flow
 
-1. Build a business profile
-2. Match the business to relevant opportunities
-3. Show readiness score and missing requirements
-4. Generate an application package
-5. Surface enterprise intelligence about community opportunity gaps
+1. **Landing** (`/`) — product overview and CTAs
+2. **Advisor Dashboard** (`/dashboard`) — organization metrics and recent assessments
+3. **Business Funding Assessment** (`/assess`) — intake form with **Load Demo Profile** (Autonomyx Solutions)
+4. **AI Analysis** (`/analyzing`) — five-step Gemini-style loading flow
+5. **Funding Readiness Report** (`/report`) — capital readiness score, funding paths, gap analysis, advisor notes, **Copy Advisor Report**
 
-## MVP Features
-
-- Business profile intake
-- AI opportunity matching
-- Readiness scoring
-- Missing requirement detection
-- Capability statement generation
-- Proposal draft generation
-- Execution plan generation
-- Enterprise opportunity gap dashboard
+Demo profile: **Autonomyx Solutions** — AI automation and tech services, Riverside CA.
 
 ## Tech Stack
 
-- React
-- Vite
-- TypeScript
-- Tailwind CSS
-- Gemini API / Google AI Studio
-- Local mock opportunity dataset for MVP
+- React, Vite, TypeScript, Tailwind CSS
+- Zustand (session persistence for demo)
+- Gemini API / Google AI Studio (mock-safe fallback for hackathon demo)
 
-## Build Workflow
+## Source of Truth
 
-This project follows the TrapLogic Studios build workflow:
+**[docs/KREDORA_ENTERPRISE_REPOSITIONING_PLAN.md](docs/KREDORA_ENTERPRISE_REPOSITIONING_PLAN.md)** — product positioning, copy specs, demo flow, and definition of done.
 
-- Docs first
-- PRD locked before build
-- Milestone-based implementation
-- Devlog for every major progress point
-- No overbuilding during hackathon MVP
+## Build
 
-## Kredora Enterprise Repositioning Plan
-
-The app is being repositioned as **Kredora — AI Funding Readiness Intelligence** for the hackathon final submission. This document is the implementation source of truth for the full enterprise pivot:
-
-**[docs/KREDORA_ENTERPRISE_REPOSITIONING_PLAN.md](docs/KREDORA_ENTERPRISE_REPOSITIONING_PLAN.md)**
-
-It covers product positioning, required demo flow, all copy and data specs, the Gemini prompt structure, Cursor agent split, implementation order, and the definition of done. All Cursor agents should reference it before making changes.
+```bash
+npm install
+npm run dev
+npm run build
+npm run lint
+```
 
 ## Status
 
-M0: Repo foundation in progress. Enterprise repositioning in progress — see Kredora plan above.
+Hackathon demo ready — see [docs/KREDORA_FINAL_QA_REPORT_2026-05-17.md](docs/KREDORA_FINAL_QA_REPORT_2026-05-17.md) for QA details.
