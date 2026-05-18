@@ -97,7 +97,7 @@ export default function LandingPage() {
 
             <div className="mt-10 flex flex-wrap items-center gap-6 sm:gap-10">
               <div>
-                <div className="text-2xl font-bold tracking-tight text-slate-900">124</div>
+                <div className="text-2xl font-bold tracking-tight text-slate-900">1,240</div>
                 <div className="font-mono text-[10px] uppercase tracking-widest text-slate-400">Businesses Assessed</div>
               </div>
               <div>
@@ -105,7 +105,7 @@ export default function LandingPage() {
                 <div className="font-mono text-[10px] uppercase tracking-widest text-slate-400">Avg Readiness Score</div>
               </div>
               <div>
-                <div className="text-2xl font-bold tracking-tight text-slate-900">86</div>
+                <div className="text-2xl font-bold tracking-tight text-slate-900">860</div>
                 <div className="font-mono text-[10px] uppercase tracking-widest text-slate-400">Reports Generated</div>
               </div>
             </div>

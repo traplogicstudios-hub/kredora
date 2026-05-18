@@ -11,9 +11,9 @@ const STATUS_BADGES = [
 ]
 
 const KPI_CARDS = [
-  { label: 'Businesses Assessed', value: '124', valueColor: 'text-slate-900' },
-  { label: 'Readiness Gaps Found', value: '317', valueColor: 'text-amber-600' },
-  { label: 'Reports Generated', value: '86', valueColor: 'text-slate-900' },
+  { label: 'Businesses Assessed', value: '1,240', valueColor: 'text-slate-900' },
+  { label: 'Readiness Gaps Found', value: '3,170', valueColor: 'text-amber-600' },
+  { label: 'Reports Generated', value: '860', valueColor: 'text-slate-900' },
   { label: 'Average Readiness Score', value: '68%', valueColor: 'text-amber-600' },
 ]
 
@@ -183,7 +183,7 @@ export default function EnterpriseDashboardPage() {
               <div className="mb-4 flex items-center justify-between">
                 <h2 className="text-base font-semibold text-slate-900">Top readiness gaps</h2>
                 <span className="font-mono text-[9px] uppercase tracking-widest text-slate-400">
-                  Across assessed businesses · N = 124
+                  Across assessed businesses · N = 1,240
                 </span>
               </div>
               <div className="space-y-3">
