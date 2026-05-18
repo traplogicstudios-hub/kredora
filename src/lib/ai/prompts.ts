@@ -1,5 +1,11 @@
-import type { BusinessProfile } from '../types'
+import type { BusinessProfile, FundingAssessmentProfile } from '../types'
 import { OPPORTUNITIES } from '../data/opportunities'
+import {
+  BUSINESS_STAGES,
+  REVENUE_RANGES,
+  FUNDING_GOAL_RANGES,
+  FUNDING_DOCUMENT_OPTIONS,
+} from '../constants'
 
 function profileContext(profile: BusinessProfile): string {
   return `
@@ -105,6 +111,77 @@ Instructions:
 - Tone: encouraging, practical, specific
 
 Return ONLY the action plan text, no preamble or commentary.`
+}
+
+function labelFor<T extends string>(
+  options: { value: T; label: string }[],
+  value: T | ''
+): string {
+  if (!value) return 'Not specified'
+  return options.find(o => o.value === value)?.label ?? value
+}
+
+function documentsLabel(ids: FundingAssessmentProfile['documentsAvailable']): string {
+  if (ids.length === 0) return 'None listed'
+  return ids
+    .map(id => FUNDING_DOCUMENT_OPTIONS.find(o => o.id === id)?.label ?? id)
+    .join(', ')
+}
+
+export function fundingReadinessPrompt(profile: FundingAssessmentProfile): string {
+  return `You are a senior funding readiness advisor for a business support organization.
+Analyze this business profile and return a structured funding readiness report.
+
+Business Profile:
+- Name: ${profile.businessName}
+- Location: ${profile.location}
+- Industry: ${profile.industry}
+- Years in Business: ${profile.yearsInBusiness}
+- Stage: ${labelFor(BUSINESS_STAGES, profile.businessStage)}
+- Revenue Range: ${labelFor(REVENUE_RANGES, profile.revenueRange)}
+- Funding Goal: ${labelFor(FUNDING_GOAL_RANGES, profile.fundingGoal)}
+- Use of Funds: ${profile.useOfFunds || 'Not specified'}
+- Documents Available: ${documentsLabel(profile.documentsAvailable)}
+- Biggest Challenge: ${profile.biggestChallenge || 'Not specified'}
+
+Return ONLY valid JSON matching this schema:
+
+{
+  "overallScore": number (0–100),
+  "scoreBreakdown": {
+    "businessFoundation": number,
+    "documentationReadiness": number,
+    "revenueClarity": number,
+    "fundingFit": number,
+    "applicationPreparedness": number
+  },
+  "aiSummary": "string — 2 sentences summarizing strengths and gaps",
+  "fundingPaths": [
+    {
+      "id": "string",
+      "name": "string",
+      "matchLevel": "High" | "Medium" | "Low",
+      "whyItFits": "string",
+      "whatToVerify": "string",
+      "documentsNeeded": ["string"],
+      "nextStep": "string"
+    }
+  ],
+  "gapAnalysis": {
+    "completed": ["string"],
+    "needsWork": ["string"],
+    "riskFlags": ["string"]
+  },
+  "advisorNotes": "string — 2 sentences, advisor-facing",
+  "entrepreneurSummary": "string — 3 sentences, plain English for business owner"
+}
+
+Safety requirements:
+- Do not guarantee funding eligibility or approval
+- Do not claim that any funding path is certain or confirmed
+- Use language like "potential fit," "readiness indicator," "what to verify," and "recommended next steps"
+- This output is not financial advice, legal advice, or a grant guarantee
+- Risk flags should describe preparation gaps, not predictions of rejection`
 }
 
 export function enterpriseInsightsPrompt(profile: BusinessProfile): string {

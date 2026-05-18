@@ -7,6 +7,8 @@ import DashboardPage from './pages/DashboardPage'
 import OpportunityDetailPage from './pages/OpportunityDetailPage'
 import ApplicationPackagePage from './pages/ApplicationPackagePage'
 import EnterpriseDashboardPage from './pages/EnterpriseDashboardPage'
+import AnalysisPage from './pages/AnalysisPage'
+import FundingReadinessReportPage from './pages/FundingReadinessReportPage'
 
 export default function App() {
   return (
@@ -14,11 +16,15 @@ export default function App() {
       <ScrollToTop />
       <Routes>
         <Route path={ROUTES.LANDING} element={<LandingPage />} />
-        <Route path={ROUTES.ONBOARD} element={<OnboardPage />} />
-        <Route path={ROUTES.DASHBOARD} element={<DashboardPage />} />
+        <Route path={ROUTES.ASSESS} element={<OnboardPage />} />
+        <Route path={ROUTES.ONBOARD} element={<Navigate to={ROUTES.ASSESS} replace />} />
+        <Route path={ROUTES.DASHBOARD} element={<EnterpriseDashboardPage />} />
+        <Route path={ROUTES.ENTERPRISE} element={<Navigate to={ROUTES.DASHBOARD} replace />} />
+        <Route path={ROUTES.ANALYZING} element={<AnalysisPage />} />
+        <Route path={ROUTES.REPORT} element={<FundingReadinessReportPage />} />
+        <Route path={ROUTES.OPPORTUNITIES} element={<DashboardPage />} />
         <Route path="/opportunity/:id" element={<OpportunityDetailPage />} />
         <Route path="/apply/:id" element={<ApplicationPackagePage />} />
-        <Route path={ROUTES.ENTERPRISE} element={<EnterpriseDashboardPage />} />
         <Route path="*" element={<Navigate to={ROUTES.LANDING} replace />} />
       </Routes>
     </BrowserRouter>

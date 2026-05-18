@@ -1,6 +1,12 @@
 import { useNavigate } from 'react-router-dom'
 import { ROUTES } from '../../lib/constants'
 
+const QUICK_LINKS = [
+  { label: 'Assessment', path: ROUTES.ASSESS },
+  { label: 'Advisor Dashboard', path: ROUTES.DASHBOARD },
+  { label: 'Report', path: ROUTES.REPORT },
+] as const
+
 export default function DemoBanner() {
   const navigate = useNavigate()
 
@@ -12,22 +18,17 @@ export default function DemoBanner() {
             Demo Mode
           </span>
           <p className="text-xs text-slate-400">
-            You're viewing{' '}
-            <span className="font-semibold text-white">Prime Clean Solutions</span>, a sample profile loaded for the TechEx hackathon demo.
-            All data, opportunities, and AI outputs are illustrative.
+            You&apos;re viewing{' '}
+            <span className="font-semibold text-white">Autonomyx Solutions</span>, a sample business profile
+            for the TechEx hackathon demo. All funding readiness data and AI outputs are illustrative.
           </p>
         </div>
         <div className="flex items-center gap-3">
           <div className="flex items-center gap-1">
-            {[
-              { label: 'Profile', path: ROUTES.ONBOARD },
-              { label: 'Dashboard', path: ROUTES.DASHBOARD },
-              { label: 'Breakdown', path: ROUTES.OPPORTUNITY('opp-riv-county-001') },
-              { label: 'Package', path: ROUTES.APPLY('opp-riv-county-001') },
-              { label: 'Enterprise', path: ROUTES.ENTERPRISE },
-            ].map(({ label, path }) => (
+            {QUICK_LINKS.map(({ label, path }) => (
               <button
                 key={label}
+                type="button"
                 onClick={() => navigate(path)}
                 className="rounded px-2 py-0.5 font-mono text-[10px] text-slate-500 transition-colors hover:bg-slate-700 hover:text-slate-200"
               >

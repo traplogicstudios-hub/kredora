@@ -6,17 +6,87 @@ import type {
   RequirementCategory,
   GapSeverity,
   InsightCategory,
+  BusinessStage,
+  RevenueRange,
+  FundingGoalRange,
+  FundingMatchLevel,
+  FundingDocumentId,
 } from '../types'
 
 // ── Routes ────────────────────────────────────────────────────────────────────
 
 export const ROUTES = {
   LANDING: '/',
-  ONBOARD: '/onboard',
+  ASSESS: '/assess',
+  ANALYZING: '/analyzing',
+  REPORT: '/report',
   DASHBOARD: '/dashboard',
+  ONBOARD: '/onboard',
+  ENTERPRISE: '/enterprise',
+  OPPORTUNITIES: '/opportunities',
   OPPORTUNITY: (id: string) => `/opportunity/${id}`,
   APPLY: (id: string) => `/apply/${id}`,
-  ENTERPRISE: '/enterprise',
+} as const
+
+// ── Kredora product copy ──────────────────────────────────────────────────────
+
+export const KREDORA_DISCLAIMER =
+  'Kredora provides funding readiness intelligence, not financial or legal advice. Results are illustrative and do not guarantee funding eligibility.'
+
+// ── Assessment form options ───────────────────────────────────────────────────
+
+export const BUSINESS_STAGES: { value: BusinessStage; label: string }[] = [
+  { value: 'pre_revenue', label: 'Pre-revenue' },
+  { value: 'early_stage', label: 'Early-stage' },
+  { value: 'growth', label: 'Growth' },
+  { value: 'established', label: 'Established' },
+]
+
+export const REVENUE_RANGES: { value: RevenueRange; label: string }[] = [
+  { value: '0_25k', label: '$0–$25K' },
+  { value: '25k_100k', label: '$25K–$100K' },
+  { value: '100k_500k', label: '$100K–$500K' },
+  { value: '500k_plus', label: '$500K+' },
+]
+
+export const FUNDING_GOAL_RANGES: { value: FundingGoalRange; label: string }[] = [
+  { value: 'under_25k', label: 'Under $25K' },
+  { value: '25k_50k', label: '$25K–$50K' },
+  { value: '50k_150k', label: '$50K–$150K' },
+  { value: '150k_plus', label: '$150K+' },
+]
+
+export const FUNDING_DOCUMENT_OPTIONS: { id: FundingDocumentId; label: string }[] = [
+  { id: 'ein', label: 'EIN' },
+  { id: 'business_bank_account', label: 'Business Bank Account' },
+  { id: 'website', label: 'Website' },
+  { id: 'business_email', label: 'Business Email' },
+  { id: 'business_license', label: 'Business License' },
+  { id: 'financial_projections', label: 'Financial Projections' },
+  { id: 'business_plan', label: 'Business Plan' },
+  { id: 'revenue_records', label: 'Revenue Records' },
+  { id: 'use_of_funds_statement', label: 'Use-of-Funds Statement' },
+  { id: 'grant_narrative', label: 'Grant Narrative' },
+]
+
+export const MATCH_LEVEL_LABELS: Record<FundingMatchLevel, string> = {
+  High: 'High',
+  Medium: 'Medium',
+  Low: 'Low',
+}
+
+export const MATCH_LEVEL_BADGE_CLASS: Record<FundingMatchLevel, string> = {
+  High: 'bg-green-100 text-green-800',
+  Medium: 'bg-amber-100 text-amber-800',
+  Low: 'bg-slate-100 text-slate-700',
+}
+
+export const SCORE_CATEGORY_LABELS = {
+  businessFoundation: 'Business Foundation',
+  documentationReadiness: 'Documentation Readiness',
+  revenueClarity: 'Revenue Clarity',
+  fundingFit: 'Funding Fit',
+  applicationPreparedness: 'Application Preparedness',
 } as const
 
 // ── NAICS Codes ───────────────────────────────────────────────────────────────

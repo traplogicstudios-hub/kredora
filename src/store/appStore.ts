@@ -18,11 +18,18 @@ import type {
   ReadinessScore,
   ApplicationPackage,
   EnterpriseDashboard,
+  FundingAssessmentProfile,
+  FundingReadinessReport,
 } from '../lib/types'
 import { DEMO_PROFILE, EMPTY_PROFILE } from '../lib/data/demoProfile'
+import {
+  EMPTY_ASSESSMENT,
+  KREDORA_DEMO_PROFILE,
+} from '../lib/data/kredoraDemoProfile'
 import { OPPORTUNITIES } from '../lib/data/opportunities'
 import { scoreAllOpportunities } from '../lib/scoring/readinessEngine'
 import { isProfileComplete } from '../lib/validators/profileValidator'
+import { isAssessmentComplete } from '../lib/validators/assessmentValidator'
 
 // ── State shape ───────────────────────────────────────────────────────────────
 
@@ -53,6 +60,16 @@ interface AppState {
   // Onboarding step tracker (not persisted — resets on refresh)
   onboardStep: number
   setOnboardStep: (step: number) => void
+
+  // Kredora funding assessment flow
+  assessment: FundingAssessmentProfile
+  assessmentComplete: boolean
+  readinessReport: FundingReadinessReport | null
+  setAssessment: (assessment: FundingAssessmentProfile) => void
+  updateAssessment: (partial: Partial<FundingAssessmentProfile>) => void
+  resetAssessment: () => void
+  loadKredoraDemoProfile: () => void
+  setReadinessReport: (report: FundingReadinessReport | null) => void
 }
 
 // ── Store ─────────────────────────────────────────────────────────────────────
@@ -86,6 +103,9 @@ export const useAppStore = create<AppState>()(
           packages: new Map(),
           enterpriseDashboard: null,
           onboardStep: 0,
+          assessment: EMPTY_ASSESSMENT,
+          assessmentComplete: false,
+          readinessReport: null,
         })
       },
 
@@ -133,15 +153,50 @@ export const useAppStore = create<AppState>()(
       // ── Onboarding ──────────────────────────────────────────────────────────
       onboardStep: 0,
       setOnboardStep: (step) => set({ onboardStep: step }),
+
+      // ── Kredora assessment ────────────────────────────────────────────────────
+      assessment: EMPTY_ASSESSMENT,
+      assessmentComplete: false,
+      readinessReport: null,
+
+      setAssessment: (assessment) => {
+        const complete = isAssessmentComplete(assessment)
+        set({ assessment, assessmentComplete: complete })
+      },
+
+      updateAssessment: (partial) => {
+        const updated = { ...get().assessment, ...partial }
+        const complete = isAssessmentComplete(updated)
+        set({ assessment: updated, assessmentComplete: complete })
+      },
+
+      resetAssessment: () => {
+        set({
+          assessment: EMPTY_ASSESSMENT,
+          assessmentComplete: false,
+          readinessReport: null,
+        })
+      },
+
+      loadKredoraDemoProfile: () => {
+        set({
+          assessment: KREDORA_DEMO_PROFILE,
+          assessmentComplete: true,
+        })
+      },
+
+      setReadinessReport: (report) => set({ readinessReport: report }),
     }),
     {
-      name: 'accessbridge-session',
+      name: 'kredora-session',
       storage: createJSONStorage(() => sessionStorage),
 
-      // Only persist the profile — everything else is derived or ephemeral
       partialize: (state) => ({
         profile: state.profile,
         profileComplete: state.profileComplete,
+        assessment: state.assessment,
+        assessmentComplete: state.assessmentComplete,
+        readinessReport: state.readinessReport,
       }),
 
       // After sessionStorage is read, recompute scores so the dashboard is ready
@@ -164,3 +219,6 @@ export const selectScore = (id: string) => (s: AppState) => s.scores.get(id)
 export const selectPackage = (id: string) => (s: AppState) => s.packages.get(id)
 export const selectEnterpriseDashboard = (s: AppState) => s.enterpriseDashboard
 export const selectOnboardStep = (s: AppState) => s.onboardStep
+export const selectAssessment = (s: AppState) => s.assessment
+export const selectAssessmentComplete = (s: AppState) => s.assessmentComplete
+export const selectReadinessReport = (s: AppState) => s.readinessReport

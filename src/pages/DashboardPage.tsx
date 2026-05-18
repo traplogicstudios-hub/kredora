@@ -140,7 +140,7 @@ export default function DashboardPage() {
           </p>
         </div>
         <button
-          onClick={() => navigate(ROUTES.ONBOARD)}
+          onClick={() => navigate(ROUTES.ASSESS)}
           className="shrink-0 flex items-center gap-1.5 rounded-md border border-slate-300 px-3 py-2 text-xs font-medium text-slate-600 hover:bg-slate-50 transition-colors"
         >
           <svg viewBox="0 0 16 16" fill="none" className="h-3.5 w-3.5" stroke="currentColor" strokeWidth="2">
@@ -154,7 +154,7 @@ export default function DashboardPage() {
       <div className="mb-6 grid grid-cols-6 gap-4">
         {[
           { label: 'Opportunities Identified', value: sorted.length, sub: 'across 6 funding categories' },
-          { label: 'Strong Matches (80+)', value: strongMatches, sub: 'match score', accent: 'text-primary-600' },
+          { label: 'Strong Matches (80+)', value: strongMatches, sub: 'readiness score', accent: 'text-primary-600' },
           { label: 'Ready to Apply (60+)', value: readyToApply, sub: 'readiness score', accent: 'text-score-almost' },
           {
             label: 'Pipeline Value',

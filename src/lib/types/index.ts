@@ -184,3 +184,84 @@ export interface EnterpriseDashboard {
   benchmarks: CompetitorBenchmark[]
   topOpportunityIds: string[]
 }
+
+// ── Kredora funding readiness (new demo flow) ─────────────────────────────────
+
+export type BusinessStage =
+  | 'pre_revenue'
+  | 'early_stage'
+  | 'growth'
+  | 'established'
+
+export type RevenueRange =
+  | '0_25k'
+  | '25k_100k'
+  | '100k_500k'
+  | '500k_plus'
+
+export type FundingGoalRange =
+  | 'under_25k'
+  | '25k_50k'
+  | '50k_150k'
+  | '150k_plus'
+
+export type FundingMatchLevel = 'High' | 'Medium' | 'Low'
+
+export type FundingDocumentId =
+  | 'ein'
+  | 'business_bank_account'
+  | 'website'
+  | 'business_email'
+  | 'business_license'
+  | 'financial_projections'
+  | 'business_plan'
+  | 'revenue_records'
+  | 'use_of_funds_statement'
+  | 'grant_narrative'
+
+export interface FundingAssessmentProfile {
+  businessName: string
+  location: string
+  industry: string
+  yearsInBusiness: number
+  businessStage: BusinessStage | ''
+  revenueRange: RevenueRange | ''
+  fundingGoal: FundingGoalRange | ''
+  useOfFunds: string
+  documentsAvailable: FundingDocumentId[]
+  biggestChallenge: string
+}
+
+export interface ScoreBreakdown {
+  businessFoundation: number
+  documentationReadiness: number
+  revenueClarity: number
+  fundingFit: number
+  applicationPreparedness: number
+}
+
+export interface FundingPath {
+  id: string
+  name: string
+  matchLevel: FundingMatchLevel
+  whyItFits: string
+  whatToVerify: string
+  documentsNeeded: string[]
+  nextStep: string
+}
+
+export interface GapAnalysis {
+  completed: string[]
+  needsWork: string[]
+  riskFlags: string[]
+}
+
+export interface FundingReadinessReport {
+  overallScore: number
+  scoreBreakdown: ScoreBreakdown
+  aiSummary: string
+  fundingPaths: FundingPath[]
+  gapAnalysis: GapAnalysis
+  advisorNotes: string
+  entrepreneurSummary: string
+}

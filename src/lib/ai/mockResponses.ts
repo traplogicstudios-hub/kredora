@@ -241,3 +241,6 @@ export const MOCK_ENTERPRISE_DASHBOARD: EnterpriseDashboard = {
   ],
   topOpportunityIds: ['opp-riv-county-001', 'opp-riverside-small-014', 'opp-microloan-009', 'opp-bond-ie-012'],
 }
+
+/** Re-export for AI-related imports; source of truth is kredoraMockReport.ts */
+export { MOCK_READINESS_REPORT } from '../data/kredoraMockReport'
