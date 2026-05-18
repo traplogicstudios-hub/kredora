@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+import ScrollToTop from './components/ScrollToTop'
 import { ROUTES } from './lib/constants'
 import LandingPage from './pages/LandingPage'
 import OnboardPage from './pages/OnboardPage'
@@ -10,6 +11,7 @@ import EnterpriseDashboardPage from './pages/EnterpriseDashboardPage'
 export default function App() {
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <Routes>
         <Route path={ROUTES.LANDING} element={<LandingPage />} />
         <Route path={ROUTES.ONBOARD} element={<OnboardPage />} />
